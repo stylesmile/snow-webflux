@@ -35,6 +35,7 @@
         <module>snow-util</module>
         <module>snow-common</module>
         <module>snow-system</module>
+        <module>snow-admin</module>
     </modules>
 
     <dependencies>
