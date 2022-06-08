@@ -65,7 +65,11 @@
             <artifactId>knife4j-springdoc-ui</artifactId>
             <version>3.0.3</version>
         </dependency>
-
+        <dependency>
+            <groupId>dev.miku</groupId>
+            <artifactId>r2dbc-mysql</artifactId>
+            <version>0.8.2.RELEASE</version>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

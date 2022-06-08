@@ -1,6 +1,7 @@
 package com.snow.entity;
 
 import org.hibernate.validator.constraints.Length;
+import org.springframework.data.relational.core.mapping.Table;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -8,6 +9,7 @@ import javax.validation.constraints.NotEmpty;
  * @author chenye
  * @date 2018/12/10
  */
+@Table(name = "sys_user")
 public class SysUser {
     /**
      * 主键

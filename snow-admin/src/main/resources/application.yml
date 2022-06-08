@@ -5,3 +5,6 @@ springdoc:
 spring:
   profiles:
     active: dev
+logging:
+  level:
+    org.springframework.r2dbc: DEBUG  #?????sql
