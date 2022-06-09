@@ -1,8 +1,10 @@
 package com.stylesmile.modules.system.entity;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * @author chenye
- * @date 2018/12/10
+ * date 2018/12/10
  */
 public class SysMenu {
     /**
@@ -12,6 +14,7 @@ public class SysMenu {
     /**
      * 父级id
      */
+    @NotNull(message = "parentId不能为空")
     private Integer parentId;
     /**
      * 名称
