@@ -1,12 +1,14 @@
 package com.stylesmile.modules.system.service.impl;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.stylesmile.common.service.BaseServiceImpl;
+import org.springframework.data.domain.Page;
 import com.stylesmile.modules.system.entity.SysRole;
-import com.stylesmile.modules.system.mapper.SysRoleMapper;
+import com.stylesmile.modules.system.repository.SysRoleRepository;
 import com.stylesmile.modules.system.vo.query.SysRoleQuery;
 import com.stylesmile.modules.system.service.SysRoleService;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
+
+import javax.annotation.Resource;
 
 /**
  * 角色 RoleService
@@ -15,16 +17,18 @@ import org.springframework.stereotype.Service;
  * @date 2019/1/8
  */
 @Service("sysRoleService")
-public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleMapper, SysRole> implements SysRoleService {
+public class SysRoleServiceImpl implements SysRoleService {
+    @Resource
+    SysRoleRepository sysRoleMapper;
 
     @Override
     public Page<SysRole> getRoleList(SysRoleQuery sysRoleQuery) {
-        return baseMapper.getRoleList(sysRoleQuery);
+        return null;
     }
 
     @Override
     public Boolean updateRole(SysRole user) {
-        return baseMapper.updateRole(user);
+        return sysRoleMapper.updateRole(user);
     }
 
     /**
@@ -35,7 +39,7 @@ public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleMapper, SysRole> 
      */
     @Override
     public Boolean deleteRole(String id) {
-        return baseMapper.deleteRole(id);
+        return sysRoleMapper.deleteRole(id);
     }
 
     /**
@@ -46,7 +50,12 @@ public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleMapper, SysRole> 
      */
     @Override
     public Integer checkDuplicate(String code) {
-        return baseMapper.checkDuplicate(code);
+        return sysRoleMapper.checkDuplicate(code);
+    }
+
+    @Override
+    public Mono<SysRole> save(SysRole role) {
+        return sysRoleMapper.save(role);
     }
 
 }

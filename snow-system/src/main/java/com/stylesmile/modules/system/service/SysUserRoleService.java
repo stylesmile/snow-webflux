@@ -1,10 +1,10 @@
 package com.stylesmile.modules.system.service;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.stylesmile.common.service.BaseService;
+import org.springframework.data.domain.Page;
 import com.stylesmile.modules.system.entity.SysRole;
-import com.stylesmile.modules.system.entity.SysUserRole;
 import com.stylesmile.modules.system.vo.query.SysRoleQuery;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
  * @author chenye
  * @date 2019/1/8
  */
-public interface SysUserRoleService extends BaseService<SysUserRole> {
+public interface SysUserRoleService{
 
     /**
      * 用户增加角色
@@ -31,7 +31,7 @@ public interface SysUserRoleService extends BaseService<SysUserRole> {
      * @param id 主键
      * @return Boolean
      */
-    Boolean deleteRole(Integer id);
+    Mono<Void> deleteRole(Integer id);
 
     /**
      * 通过用户id 查询该用户拥有的角色
@@ -39,5 +39,5 @@ public interface SysUserRoleService extends BaseService<SysUserRole> {
      * @param sysRoleQuery 用户id
      * @return Page<SysRole>
      */
-    Page<SysRole> getUserRoleList(SysRoleQuery sysRoleQuery);
+    Flux<SysRole> getUserRoleList(SysRoleQuery sysRoleQuery);
 }

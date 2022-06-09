@@ -1,16 +1,17 @@
 package com.stylesmile.modules.system.service;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.springframework.data.domain.Page;
 import com.stylesmile.common.service.BaseService;
 import com.stylesmile.modules.system.entity.SysRole;
 import com.stylesmile.modules.system.vo.query.SysRoleQuery;
+import reactor.core.publisher.Mono;
 
 /**
  * @Description: 角色管理
  * @Author: StyleSmile
  * @Date: 2019/1/8
  */
-public interface SysRoleService extends BaseService<SysRole> {
+public interface SysRoleService{
     /**
      * 查询角色
      *
@@ -43,4 +44,5 @@ public interface SysRoleService extends BaseService<SysRole> {
      */
     Integer checkDuplicate(String code);
 
+    Mono<SysRole> save(SysRole role);
 }

@@ -2,6 +2,7 @@ package com.stylesmile.modules.system.service;
 
 import com.stylesmile.common.service.BaseService;
 import com.stylesmile.modules.system.entity.SysRoleMenu;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * @author chenye
  * @date 2019/1/8
  */
-public interface SysRoleMenuService extends BaseService<SysRoleMenu> {
+public interface SysRoleMenuService  {
 
     /**
      * 角色增加菜单
@@ -29,4 +30,6 @@ public interface SysRoleMenuService extends BaseService<SysRoleMenu> {
      * @return List<SysRoleMenu>
      */
     List<Integer> getRoleMenuList(Integer roleId);
+
+    Mono<Void> removeByIds(List<Integer> strToLongList);
 }

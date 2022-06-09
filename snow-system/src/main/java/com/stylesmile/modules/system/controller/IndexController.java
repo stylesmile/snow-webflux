@@ -1,18 +1,18 @@
 package com.stylesmile.modules.system.controller;
 
-import com.stylesmile.aop.log.LogLogin;
+import com.stylesmile.com.aop.log.LogLogin;
 import com.stylesmile.common.util.Result;
 import com.stylesmile.modules.system.service.SysMenuService;
-import com.stylesmile.modules.system.service.SysUserService;
+import com.stylesmile.modules.system.service.impl.SysUserService;
 import com.stylesmile.modules.system.vo.tree.MenuTree;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -26,9 +26,9 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class IndexController {
 
-    @Resource
+    @Autowired(required = false)
     SysUserService sysUserService;
-    @Resource
+    @Autowired(required = false)
     SysMenuService sysMenuService;
 
 

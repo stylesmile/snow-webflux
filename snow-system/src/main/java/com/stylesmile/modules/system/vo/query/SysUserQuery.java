@@ -1,19 +1,27 @@
 package com.stylesmile.modules.system.vo.query;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.stylesmile.modules.system.entity.SysUser;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 /**
  * @author chenye
  * @date 2018/12/10
  */
-public class SysUserQuery extends Page<SysUser> {
+public class SysUserQuery extends PageImpl<SysUser> {
 
     private String username;
     private String nickname;
     private String phone;
     private String email;
     private String departId;
+
+    public SysUserQuery(List<SysUser> content, Pageable pageable, long total) {
+        super(content, pageable, total);
+    }
 
     public String getUsername() {
         return username;

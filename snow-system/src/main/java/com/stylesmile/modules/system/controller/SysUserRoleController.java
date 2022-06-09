@@ -1,6 +1,6 @@
 package com.stylesmile.modules.system.controller;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.springframework.data.domain.Page;
 import com.stylesmile.modules.system.entity.SysRole;
 import com.stylesmile.modules.system.vo.query.SysRoleQuery;
 import com.stylesmile.modules.system.service.SysUserRoleService;
@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import reactor.core.publisher.Mono;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -48,8 +49,7 @@ public class SysUserRoleController {
      */
     @GetMapping(BASE_URL_PATH + "/userRoleList.json")
     public Result selectRolePage(SysRoleQuery sysRoleQuery) {
-        Page<SysRole> page = sysUserRoleService.getUserRoleList(sysRoleQuery);
-        return Result.success(page);
+        return null;
     }
 
     /**
@@ -77,8 +77,8 @@ public class SysUserRoleController {
      */
     @PostMapping(BASE_URL_PATH + "/deleteRole.json")
     @ResponseBody
-    public Result deleteRole(Integer id) {
-        return Result.bool(sysUserRoleService.deleteRole(id));
+    public Mono<Void> deleteRole(Integer id) {
+        return sysUserRoleService.deleteRole(id);
     }
 
 }

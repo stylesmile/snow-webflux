@@ -1,15 +1,15 @@
 package com.stylesmile.modules.system.service.impl;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.stylesmile.common.service.BaseServiceImpl;
 import com.stylesmile.modules.system.entity.SysRole;
 import com.stylesmile.modules.system.entity.SysUserRole;
-import com.stylesmile.modules.system.mapper.SysUserRoleMapper;
+import com.stylesmile.modules.system.repository.SysUserRoleRepository;
 import com.stylesmile.modules.system.vo.query.SysRoleQuery;
 import com.stylesmile.modules.system.service.SysUserRoleService;
 import com.stylesmile.common.util.ConvertUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -23,9 +23,9 @@ import java.util.List;
  */
 @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 @Service("sysUserRoleService")
-public class SysUserRoleServiceImpl extends BaseServiceImpl<SysUserRoleMapper, SysUserRole> implements SysUserRoleService {
+public class SysUserRoleServiceImpl implements SysUserRoleService {
     @Autowired
-    SysUserRoleMapper sysUserRoleMapper;
+    SysUserRoleRepository sysUserRoleMapper;
 
     /**
      * 用户添加角色
@@ -46,13 +46,13 @@ public class SysUserRoleServiceImpl extends BaseServiceImpl<SysUserRoleMapper, S
         if (sysUserRoleList.size() == 0) {
             return false;
         }
-        this.saveBatch(sysUserRoleList);
+        sysUserRoleMapper.saveAll(sysUserRoleList);
         return true;
     }
 
     @Override
-    public Boolean deleteRole(Integer id) {
-        return sysUserRoleMapper.deleteById(id) > 0 ? true : false;
+    public Mono<Void> deleteRole(Integer id) {
+        return sysUserRoleMapper.deleteById(id);
     }
 
     /**
@@ -62,7 +62,7 @@ public class SysUserRoleServiceImpl extends BaseServiceImpl<SysUserRoleMapper, S
      * @return Page<SysRole>
      */
     @Override
-    public Page<SysRole> getUserRoleList(SysRoleQuery sysRoleQuery) {
-        return baseMapper.getUserRoleList(sysRoleQuery);
+    public Flux<SysRole> getUserRoleList(SysRoleQuery sysRoleQuery) {
+        return null;
     }
 }

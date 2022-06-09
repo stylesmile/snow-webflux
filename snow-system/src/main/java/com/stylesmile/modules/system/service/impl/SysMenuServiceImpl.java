@@ -1,14 +1,13 @@
 package com.stylesmile.modules.system.service.impl;
 
-import com.stylesmile.common.service.BaseServiceImpl;
 import com.stylesmile.common.constant.UserConstant;
 import com.stylesmile.modules.system.entity.SysMenu;
 import com.stylesmile.modules.system.entity.SysUser;
-import com.stylesmile.modules.system.mapper.SysMenuMapper;
+import com.stylesmile.modules.system.repository.SysMenuRepository;
 import com.stylesmile.modules.system.service.SysMenuService;
-import com.stylesmile.modules.system.service.SysUserService;
 import com.stylesmile.modules.system.vo.tree.MenuTree;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -21,10 +20,12 @@ import java.util.List;
  * @date 2019/1/8
  */
 @Service("sysMenuService")
-public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuMapper, SysMenu> implements SysMenuService {
+public class SysMenuServiceImpl implements SysMenuService {
 
     @Resource
     SysUserService sysUserService;
+    @Resource
+    SysMenuRepository sysMenuMapper;
 
     /**
      * 查询菜单
@@ -33,7 +34,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuMapper, SysMenu> 
      */
     @Override
     public List<SysMenu> getList() {
-        return baseMapper.getMenuList();
+        return sysMenuMapper.getMenuList();
     }
 
     /**
@@ -44,7 +45,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuMapper, SysMenu> 
      */
     @Override
     public Boolean updateMenu(SysMenu sysMenu) {
-        return baseMapper.updateMenu(sysMenu);
+        return sysMenuMapper.updateMenu(sysMenu);
     }
 
     /**
@@ -55,7 +56,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuMapper, SysMenu> 
      */
     @Override
     public Boolean deleteMenu(String id) {
-        return baseMapper.deleteMenu(id);
+        return sysMenuMapper.deleteMenu(id);
     }
 
     /**
@@ -70,9 +71,19 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuMapper, SysMenu> 
         SysUser sysUser = sysUserService.getSessionUser(httpServletRequest);
         Integer userId = sysUser.getUsername() == UserConstant.SUPPER_ADMIN ? sysUser.getId() : null;
         //通过用户id获取菜单list
-        List<SysMenu> sysMenuList = baseMapper.getMenuListByUserId(userId);
+        List<SysMenu> sysMenuList = sysMenuMapper.getMenuListByUserId(userId);
         //list to tree
         return MenuTree.listToTree(sysMenuList);
+    }
+
+    @Override
+    public Mono<SysMenu> save(SysMenu menu) {
+        return sysMenuMapper.save(menu);
+    }
+
+    @Override
+    public Mono<SysMenu> updateById(SysMenu sysMenu) {
+        return sysMenuMapper.save(sysMenu);
     }
 
 }

@@ -1,19 +1,27 @@
 package com.stylesmile.modules.system.vo.query;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.stylesmile.modules.system.entity.SysUser;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+
+import java.util.List;
 
 /**
  * @author chenye
  * @date 2018/12/10
  */
-public class SysRoleQuery extends Page<SysUser> {
+public class SysRoleQuery extends PageImpl<SysUser> {
 
     private int id;
     private String name;
     private String code;
     private String sort;
     private String userId;
+
+    public SysRoleQuery(List<SysUser> content, Pageable pageable, long total) {
+        super(content, pageable, total);
+    }
 
     public int getId() {
         return id;
@@ -39,8 +47,8 @@ public class SysRoleQuery extends Page<SysUser> {
         this.code = code;
     }
 
-    public String getSort() {
-        return sort;
+    public Sort getSort() {
+        return null;
     }
 
     public void setSort(String sort) {

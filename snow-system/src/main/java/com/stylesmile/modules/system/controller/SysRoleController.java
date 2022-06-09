@@ -1,16 +1,18 @@
 package com.stylesmile.modules.system.controller;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.springframework.data.domain.Page;
 import com.stylesmile.modules.system.entity.SysRole;
 import com.stylesmile.modules.system.vo.query.SysRoleQuery;
 import com.stylesmile.modules.system.service.SysRoleService;
 import com.stylesmile.common.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import reactor.core.publisher.Mono;
 
 /**
  * 角色管理
@@ -65,13 +67,10 @@ public class SysRoleController {
      */
     @PostMapping(BASE_URL_PATH + "/add.json")
     @ResponseBody
-    public Result add(SysRole role) {
+    public Mono<SysRole> add(SysRole role) {
         //判断编号code是否重复
         Integer count = sysRoleService.checkDuplicate(role.getCode());
-        if (count > 0) {
-            return Result.fail("编号重复!");
-        }
-        return Result.bool(sysRoleService.save(role));
+        return sysRoleService.save(role);
     }
 
     /**
@@ -82,8 +81,8 @@ public class SysRoleController {
     @GetMapping(BASE_URL_PATH + "/edit.html")
     public ModelAndView edit(String id) {
         ModelAndView view = new ModelAndView(BASE_HTML_PATH + "/role_edit");
-        SysRole role = sysRoleService.getById(id);
-        view.addObject("role", role);
+//        SysRole role = sysRoleService.getById(id);
+//        view.addObject("role", role);
         return view;
     }
 

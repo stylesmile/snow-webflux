@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -79,9 +80,9 @@ public class SysRoleMenuController {
      */
     @PostMapping(BASE_URL_PATH + "/deleteRoleMenu.json")
     @ResponseBody
-    public Result deleteRoleMenu(String ids) {
+    public Mono<Void> deleteRoleMenu(String ids) {
         //批量删除
-        return Result.bool(sysRoleMenuService.removeByIds(ConvertUtil.strToLongList(ids)));
+        return sysRoleMenuService.removeByIds(ConvertUtil.strToLongList(ids));
     }
 
 }

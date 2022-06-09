@@ -1,14 +1,15 @@
 package com.stylesmile.modules.system.service.impl;
 
 import com.stylesmile.common.constant.CacheConstant;
-import com.stylesmile.common.service.BaseServiceImpl;
 import com.stylesmile.modules.system.entity.SysDepart;
-import com.stylesmile.modules.system.mapper.SysDepartMapper;
+import com.stylesmile.modules.system.repository.SysDepartRepository;
 import com.stylesmile.modules.system.service.SysDepartService;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -18,7 +19,10 @@ import java.util.List;
  * @date 2019/1/8
  */
 @Service("sysDepartService")
-public class SysDepartServiceImpl extends BaseServiceImpl<SysDepartMapper, SysDepart> implements SysDepartService {
+public class SysDepartServiceImpl implements SysDepartService {
+    @Resource
+    SysDepartRepository sysDepartRepository;
+
     /**
      * 查询部门
      *
@@ -27,9 +31,9 @@ public class SysDepartServiceImpl extends BaseServiceImpl<SysDepartMapper, SysDe
     @Cacheable(value = CacheConstant.deptCache.DEPART_LIST_CACHE)
     @Override
     public List<SysDepart> getList(String source) {
-        List<SysDepart> sysDepartList = baseMapper.getDepartList();
-        if("user_dept".equals(source)){
-            for (SysDepart dept :sysDepartList) {
+        List<SysDepart> sysDepartList = sysDepartRepository.getDepartList();
+        if ("user_dept".equals(source)) {
+            for (SysDepart dept : sysDepartList) {
 
             }
         }
@@ -44,7 +48,7 @@ public class SysDepartServiceImpl extends BaseServiceImpl<SysDepartMapper, SysDe
      */
     @Override
     public Boolean updateDepart(SysDepart sysDepart) {
-        boolean b = baseMapper.updateDepart(sysDepart);
+        boolean b = sysDepartRepository.updateDepart(sysDepart);
         //清除缓存
         this.clearDepartListCache();
         this.clearDept(sysDepart.getId());
@@ -59,7 +63,7 @@ public class SysDepartServiceImpl extends BaseServiceImpl<SysDepartMapper, SysDe
      */
     @Override
     public Boolean deleteDepart(int id) {
-        Boolean b = baseMapper.deleteDepart(id);
+        Boolean b = sysDepartRepository.deleteDepart(id);
         //清除缓存
         this.clearDepartListCache();
         this.clearDept(id);
@@ -81,7 +85,7 @@ public class SysDepartServiceImpl extends BaseServiceImpl<SysDepartMapper, SysDe
     @Cacheable(value = CacheConstant.deptCache.DEPART_CACHE, key = "#id")
     @Override
     public SysDepart getDeptById(Integer id) {
-        return baseMapper.selectById(id);
+        return null;
     }
 
     /**
@@ -90,6 +94,16 @@ public class SysDepartServiceImpl extends BaseServiceImpl<SysDepartMapper, SysDe
     @CacheEvict(value = CacheConstant.deptCache.DEPART_CACHE, key = "#id")
     @Override
     public void clearDept(Integer id) {
+    }
+
+    @Override
+    public Mono<SysDepart> save(SysDepart depart) {
+        return sysDepartRepository.save(depart);
+    }
+
+    @Override
+    public Mono<SysDepart> updateById(SysDepart sysDepart) {
+        return sysDepartRepository.save(sysDepart);
     }
 
 }

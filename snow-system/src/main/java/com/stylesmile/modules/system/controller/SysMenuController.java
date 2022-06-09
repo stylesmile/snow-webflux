@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -64,8 +65,8 @@ public class SysMenuController {
      */
     @PostMapping(BASE_URL_PATH + "/add.json")
     @ResponseBody
-    public Result add(SysMenu menu) {
-        return Result.bool(sysMenuService.save(menu));
+    public Mono<SysMenu> add(SysMenu menu) {
+        return sysMenuService.save(menu);
     }
 
     /**
@@ -76,8 +77,8 @@ public class SysMenuController {
     @GetMapping(BASE_URL_PATH + "/edit.html")
     public ModelAndView edit(Long id) {
         ModelAndView view = new ModelAndView(BASE_HTML_PATH + "/menu_edit");
-        SysMenu menu = sysMenuService.getById(id);
-        view.addObject("menu", menu);
+//        SysMenu menu = sysMenuService.getById(id);
+//        view.addObject("menu", menu);
         return view;
     }
 
@@ -88,8 +89,8 @@ public class SysMenuController {
      */
     @PostMapping(BASE_URL_PATH + "/edit.json")
     @ResponseBody
-    public Result edit(SysMenu sysMenu) {
-        return Result.bool(sysMenuService.updateById(sysMenu));
+    public Mono<SysMenu> edit(SysMenu sysMenu) {
+        return sysMenuService.updateById(sysMenu);
     }
 
     /**

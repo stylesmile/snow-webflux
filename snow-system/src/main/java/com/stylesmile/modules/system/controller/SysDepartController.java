@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import reactor.core.publisher.Mono;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -66,8 +67,8 @@ public class SysDepartController {
      */
     @PostMapping(BASE_URL_PATH + "/add.json")
     @ResponseBody
-    public Result add(SysDepart depart) {
-        return Result.bool(sysDepartService.save(depart));
+    public Mono<SysDepart> add(SysDepart depart) {
+        return sysDepartService.save(depart);
     }
 
     /**
@@ -78,8 +79,8 @@ public class SysDepartController {
     @GetMapping(BASE_URL_PATH + "/edit.html")
     public ModelAndView edit(Long id) {
         ModelAndView view = new ModelAndView(BASE_HTML_PATH + "/depart_edit");
-        SysDepart depart = sysDepartService.getById(id);
-        view.addObject("depart", depart);
+//        SysDepart depart = sysDepartService.getById(id);
+//        view.addObject("depart", depart);
         return view;
     }
 
@@ -90,8 +91,8 @@ public class SysDepartController {
      */
     @PostMapping(BASE_URL_PATH + "/edit.json")
     @ResponseBody
-    public Result edit(SysDepart sysDepart) {
-        return Result.bool(sysDepartService.updateById(sysDepart));
+    public Mono<SysDepart> edit(SysDepart sysDepart) {
+        return sysDepartService.updateById(sysDepart);
     }
 
     /**

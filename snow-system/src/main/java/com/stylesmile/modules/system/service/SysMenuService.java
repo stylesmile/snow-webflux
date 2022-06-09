@@ -3,6 +3,7 @@ package com.stylesmile.modules.system.service;
 import com.stylesmile.common.service.BaseService;
 import com.stylesmile.modules.system.entity.SysMenu;
 import com.stylesmile.modules.system.vo.tree.MenuTree;
+import reactor.core.publisher.Mono;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  * @author chenye
  * @date 2019/1/8 21:23
  */
-public interface SysMenuService extends BaseService<SysMenu> {
+public interface SysMenuService {
 
     /**
      * 查询菜单列表
@@ -45,4 +46,8 @@ public interface SysMenuService extends BaseService<SysMenu> {
      * @return List<SysMenu>
      */
     MenuTree getMenuListByUserId(HttpServletRequest httpServletRequest);
+
+    Mono<SysMenu> save(SysMenu menu);
+
+    Mono<SysMenu> updateById(SysMenu sysMenu);
 }

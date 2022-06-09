@@ -1,12 +1,13 @@
 package com.stylesmile.modules.system.service.impl;
 
-import com.stylesmile.common.service.BaseServiceImpl;
 import com.stylesmile.modules.system.entity.SysRoleMenu;
-import com.stylesmile.modules.system.mapper.SysRoleMenuMapper;
+import com.stylesmile.modules.system.repository.SysRoleMenuMapper;
 import com.stylesmile.modules.system.service.SysRoleMenuService;
 import com.stylesmile.common.util.ConvertUtil;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +18,10 @@ import java.util.List;
  * @date 2019/1/8
  */
 @Service("sysRoleMenuService")
-public class SysRoleMenuServiceImpl extends BaseServiceImpl<SysRoleMenuMapper, SysRoleMenu> implements SysRoleMenuService {
+public class SysRoleMenuServiceImpl  implements SysRoleMenuService {
 
+    @Resource
+    SysRoleMenuMapper sysRoleMenuMapper;
     /**
      * 角色增加菜单
      *
@@ -44,7 +47,7 @@ public class SysRoleMenuServiceImpl extends BaseServiceImpl<SysRoleMenuMapper, S
         }
         if (delIds.size() > 0) {
             //批量删除
-            this.removeByIds(delIds);
+            sysRoleMenuMapper.deleteAllById(delIds);
         }
         //待新增
         for (Integer id : all) {
@@ -55,7 +58,7 @@ public class SysRoleMenuServiceImpl extends BaseServiceImpl<SysRoleMenuMapper, S
         }
         if (sysRoleMenuList.size() > 0) {
             //批量新增
-            this.saveBatch(sysRoleMenuList);
+            sysRoleMenuMapper.saveAll(sysRoleMenuList);
         }
         return true;
     }
@@ -68,6 +71,11 @@ public class SysRoleMenuServiceImpl extends BaseServiceImpl<SysRoleMenuMapper, S
      */
     @Override
     public List<Integer> getRoleMenuList(Integer roleId) {
-        return baseMapper.getRoleMenuList(roleId);
+        return sysRoleMenuMapper.getRoleMenuList(roleId);
+    }
+
+    @Override
+    public Mono<Void> removeByIds(List<Integer> strToLongList) {
+        return sysRoleMenuMapper.deleteAllById(strToLongList);
     }
 }

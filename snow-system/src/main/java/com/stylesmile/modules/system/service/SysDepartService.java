@@ -2,6 +2,7 @@ package com.stylesmile.modules.system.service;
 
 import com.stylesmile.common.service.BaseService;
 import com.stylesmile.modules.system.entity.SysDepart;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -11,7 +12,8 @@ import java.util.List;
  * @author chenye
  * @date 2019/1/8 21:23
  */
-public interface SysDepartService extends BaseService<SysDepart> {
+public interface SysDepartService// extends BaseService<SysDepart>
+{
 
     /**
      * 查询部门列表
@@ -54,4 +56,7 @@ public interface SysDepartService extends BaseService<SysDepart> {
      */
     void clearDept(Integer id);
 
+    Mono<SysDepart> save(SysDepart depart);
+
+    Mono<SysDepart> updateById(SysDepart sysDepart);
 }

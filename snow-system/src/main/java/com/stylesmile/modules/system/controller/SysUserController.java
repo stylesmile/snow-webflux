@@ -1,10 +1,10 @@
 package com.stylesmile.modules.system.controller;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.stylesmile.modules.system.entity.SysUser;
-import com.stylesmile.modules.system.vo.query.SysUserQuery;
-import com.stylesmile.modules.system.service.SysUserService;
+import org.springframework.data.domain.Page;
 import com.stylesmile.common.util.Result;
+import com.stylesmile.modules.system.entity.SysUser;
+import com.stylesmile.modules.system.service.impl.SysUserService;
+import com.stylesmile.modules.system.vo.query.SysUserQuery;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -62,7 +62,8 @@ public class SysUserController {
     @PostMapping(BASE_URL_PATH + "/add.json")
     @ResponseBody
     public Result add(SysUser user) {
-        return Result.bool(sysUserService.saveOrUpdate(user));
+//        return Result.bool(sysUserService.saveOrUpdate(user));
+        return null;
     }
 
     /**
@@ -73,8 +74,8 @@ public class SysUserController {
     @GetMapping(BASE_URL_PATH + "/edit.html")
     public ModelAndView edit(String id) {
         ModelAndView view = new ModelAndView(BASE_HTML_PATH + "/user_edit");
-        SysUser user = sysUserService.getById(id);
-        view.addObject("user", user);
+//        SysUser user = sysUserService.getById(id);
+//        view.addObject("user", user);
         return view;
     }
 
