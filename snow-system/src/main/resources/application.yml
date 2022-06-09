@@ -22,7 +22,6 @@ springdoc:
   swagger-ui:
     use-root-path: true
   packages-to-scan: com.stylesmile.modules
-kni
 logging:
   level:
     com.stylesmile: debug
