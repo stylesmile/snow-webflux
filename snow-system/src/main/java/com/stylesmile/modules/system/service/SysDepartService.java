@@ -1,6 +1,5 @@
 package com.stylesmile.modules.system.service;
 
-import com.stylesmile.common.service.BaseService;
 import com.stylesmile.modules.system.entity.SysDepart;
 import reactor.core.publisher.Mono;
 

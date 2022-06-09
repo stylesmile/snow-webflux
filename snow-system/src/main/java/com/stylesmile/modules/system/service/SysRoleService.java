@@ -1,7 +1,6 @@
 package com.stylesmile.modules.system.service;
 
 import org.springframework.data.domain.Page;
-import com.stylesmile.common.service.BaseService;
 import com.stylesmile.modules.system.entity.SysRole;
 import com.stylesmile.modules.system.vo.query.SysRoleQuery;
 import reactor.core.publisher.Mono;
