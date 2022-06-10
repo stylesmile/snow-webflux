@@ -1,112 +1,273 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.0</version>
-<!--        <version>3.0.0-SNAPSHOT</version>-->
-        <relativePath/>
-    </parent>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
-        <snow.version>1.2.1-SNAPSHOT</snow.version>
-        <snow.util.version>1.2.1-SNAPSHOT</snow.util.version>
-        <snow.common.version>1.2.1-SNAPSHOT</snow.common.version>
-        <snow.console.version>1.2.1-SNAPSHOT</snow.console.version>
-        <!-- 打包时忽略测试 -->
-        <skipTests>true</skipTests>
-    </properties>
+	<groupId>com.snow</groupId>
+	<artifactId>snow</artifactId>
+	<version>3.8.2</version>
 
-    <name>snow</name>
+	<name>snow</name>
+	<description>snow管理系统</description>
 
-    <groupId>com.stylesmile</groupId>
-    <artifactId>snow</artifactId>
-    <version>${snow.version}</version>
-    <packaging>pom</packaging>
+	<properties>
+		<snow.version>3.8.2</snow.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
+		<spring-boot.version>2.6.4</spring-boot.version>
+		<bitwalker.version>1.21</bitwalker.version>
+		<swagger.version>3.0.0</swagger.version>
+		<kaptcha.version>2.3.2</kaptcha.version>
+		<mybatis-spring-boot.version>2.2.2</mybatis-spring-boot.version>
+		<fastjson.version>1.2.80</fastjson.version>
+		<oshi.version>6.1.2</oshi.version>
+		<jna.version>5.10.0</jna.version>
+		<commons.io.version>2.11.0</commons.io.version>
+		<commons.fileupload.version>1.4</commons.fileupload.version>
+		<commons.collections.version>3.2.2</commons.collections.version>
+		<poi.version>4.1.2</poi.version>
+		<velocity.version>2.3</velocity.version>
+		<jwt.version>0.9.1</jwt.version>
+		<r2dbc-bom.version>Borca-RELEASE</r2dbc-bom.version>
+		<mybatis-r2dbc.version>1.1.0.RELEASE</mybatis-r2dbc.version>
+	</properties>
+
+	<!-- 依赖声明 -->
+	<dependencyManagement>
+		<dependencies>
+
+			<!-- SpringBoot的依赖配置-->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring-boot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<!--R2DBC -->
+			<dependency>
+				<groupId>io.r2dbc</groupId>
+				<artifactId>r2dbc-bom</artifactId>
+				<version>${r2dbc-bom.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client -->
+			<!-- <dependency>
+				<groupId>org.mariadb.jdbc</groupId>
+				<artifactId>mariadb-java-client</artifactId>
+				<version>3.0.4</version>
+			</dependency> -->
+
+			<!-- https://mvnrepository.com/artifact/org.mariadb/r2dbc-mariadb -->
+			<dependency>
+				<groupId>org.mariadb</groupId>
+				<artifactId>r2dbc-mariadb</artifactId>
+				<version>1.0.3</version>
+			</dependency>
+
+			<!-- MyBatis R2DBC -->
+			<dependency>
+				<groupId>pro.chenggang</groupId>
+				<artifactId>mybatis-r2dbc-spring</artifactId>
+				<version>${mybatis-r2dbc.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>pro.chenggang</groupId>
+				<artifactId>mybatis-r2dbc</artifactId>
+				<version>${mybatis-r2dbc.version}</version>
+			</dependency>
+
+			<!-- 解析客户端操作系统、浏览器等 -->
+			<dependency>
+				<groupId>eu.bitwalker</groupId>
+				<artifactId>UserAgentUtils</artifactId>
+				<version>${bitwalker.version}</version>
+			</dependency>
+
+			<!-- 获取系统信息 -->
+			<dependency>
+				<groupId>com.github.oshi</groupId>
+				<artifactId>oshi-core</artifactId>
+				<version>${oshi.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>net.java.dev.jna</groupId>
+				<artifactId>jna</artifactId>
+				<version>${jna.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>net.java.dev.jna</groupId>
+				<artifactId>jna-platform</artifactId>
+				<version>${jna.version}</version>
+			</dependency>
+
+			<!-- Swagger3依赖 -->
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-boot-starter</artifactId>
+				<version>${swagger.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>io.swagger</groupId>
+						<artifactId>swagger-models</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<!-- io常用工具类 -->
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>${commons.io.version}</version>
+			</dependency>
+
+			<!-- 文件上传工具类 -->
+			<dependency>
+				<groupId>commons-fileupload</groupId>
+				<artifactId>commons-fileupload</artifactId>
+				<version>${commons.fileupload.version}</version>
+			</dependency>
+
+			<!-- excel工具 -->
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi-ooxml</artifactId>
+				<version>${poi.version}</version>
+			</dependency>
+
+			<!-- velocity代码生成使用模板 -->
+			<dependency>
+				<groupId>org.apache.velocity</groupId>
+				<artifactId>velocity-engine-core</artifactId>
+				<version>${velocity.version}</version>
+			</dependency>
+
+			<!-- collections工具类 -->
+			<dependency>
+				<groupId>commons-collections</groupId>
+				<artifactId>commons-collections</artifactId>
+				<version>${commons.collections.version}</version>
+			</dependency>
+
+			<!-- 阿里JSON解析器 -->
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>fastjson</artifactId>
+				<version>${fastjson.version}</version>
+			</dependency>
+
+			<!-- Token生成与解析-->
+			<dependency>
+				<groupId>io.jsonwebtoken</groupId>
+				<artifactId>jjwt</artifactId>
+				<version>${jwt.version}</version>
+			</dependency>
+
+			<!-- 验证码 -->
+			<dependency>
+				<groupId>com.github.penggle</groupId>
+				<artifactId>kaptcha</artifactId>
+				<version>${kaptcha.version}</version>
+			</dependency>
+
+			<!-- 定时任务-->
+			<dependency>
+				<groupId>com.snow</groupId>
+				<artifactId>snow-quartz</artifactId>
+				<version>${snow.version}</version>
+			</dependency>
+
+			<!-- 代码生成-->
+			<dependency>
+				<groupId>com.snow</groupId>
+				<artifactId>snow-generator</artifactId>
+				<version>${snow.version}</version>
+			</dependency>
+
+			<!-- 核心模块-->
+			<dependency>
+				<groupId>com.snow</groupId>
+				<artifactId>snow-framework</artifactId>
+				<version>${snow.version}</version>
+			</dependency>
+
+			<!-- 系统模块-->
+			<dependency>
+				<groupId>com.snow</groupId>
+				<artifactId>snow-system</artifactId>
+				<version>${snow.version}</version>
+			</dependency>
+
+			<!-- 通用工具-->
+			<dependency>
+				<groupId>com.snow</groupId>
+				<artifactId>snow-common</artifactId>
+				<version>${snow.version}</version>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+	<modules>
+		<module>snow-admin</module>
+		<module>snow-framework</module>
+		<module>snow-system</module>
+		<module>snow-quartz</module>
+		<module>snow-generator</module>
+		<module>snow-common</module>
+	</modules>
+	<packaging>pom</packaging>
 
 
-    <description>Demo project for Spring Boot</description>
-    <modules>
-        <module>snow-util</module>
-        <module>snow-common</module>
-        <module>snow-system</module>
-    </modules>
+	<dependencies>
 
-    <dependencies>
-        <!-- 公共依赖 -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-    <dependencyManagement>
-        <dependencies>
-        </dependencies>
-    </dependencyManagement>
+	</dependencies>
 
-    <!-- maven 仓库 -->
-    <repositories>
-        <repository>
-            <id>aliyun-nexus</id>
-            <name>aliyun-nexus</name>
-            <url>https://maven.aliyun.com/repository/public</url>
-            <snapshots><!--快照-->
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>spring-snapshots</id>
-            <name>Spring Snapshots</name>
-            <url>https://repo.spring.io/snapshot</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-    <!--插件仓库-->
-    <pluginRepositories>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
-        <pluginRepository>
-            <id>spring-snapshots</id>
-            <name>Spring Snapshots</name>
-            <url>https://repo.spring.io/snapshot</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
-<!--        <pluginRepository>-->
-<!--            <id>aliyun-nexus</id>-->
-<!--            <name>aliyun-nexus</name>-->
-<!--            <url>https://maven.aliyun.com/repository/public</url>-->
-<!--            <snapshots>-->
-<!--                <enabled>true</enabled>-->
-<!--            </snapshots>-->
-<!--        </pluginRepository>-->
-    </pluginRepositories>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+	<repositories>
+		<repository>
+			<id>public</id>
+			<name>aliyun nexus</name>
+			<url>https://maven.aliyun.com/repository/public</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>public</id>
+			<name>aliyun nexus</name>
+			<url>https://maven.aliyun.com/repository/public</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
 </project>

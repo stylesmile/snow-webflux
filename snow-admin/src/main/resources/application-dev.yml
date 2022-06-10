@@ -1,0 +1,34 @@
+# 数据源配置
+spring:
+    main:
+        lazy-initialization: true
+    r2dbc:
+        url: r2dbc:mysql://localhost:3306/snow-webflux?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+        username: root
+        password: 123456
+        mybatis:
+            r2dbc-url: r2dbc:mysql://localhost:3306/snow-webflux?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+            username: root
+            password: 123456
+            pool:
+                enabled: true
+                max-idle-time: PT3M
+                validation-query: SELECT 1 FROM DUAL
+                initial-size: 3
+                max-size: 10
+                acquire-retry: 3
+                validation-depth: REMOTE
+                max-create-connection-time: PT30S
+    datasource:
+        url: jdbc:mysql://localhost:3306/snow-webflux?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+        username: root
+        password: 123456
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        hikari:
+            connection-init-sql: SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci
+            minimum-idle: 1
+            maximum-pool-size: 2
+            idle-timeout: 500000
+            max-lifetime: 540000
+            connection-timeout: 60000
+            connection-test-query: SELECT 1

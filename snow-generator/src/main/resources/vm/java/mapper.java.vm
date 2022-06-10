@@ -1,0 +1,31 @@
+package ${packageName}.mapper;
+
+import com.snow.common.biz.IMapper;
+import ${packageName}.domain.${ClassName};
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+/**
+ * ${functionName}Mapper接口
+ * 
+ * @author ${author}
+ * @date ${datetime}
+ */
+public interface ${ClassName}Mapper extends IMapper<${ClassName}, ${pkColumn.javaType}>
+{
+    /**
+     * 查询${functionName}
+     * 
+     * @param id ${functionName}主键
+     * @return ${functionName}
+     */
+    public Mono<${ClassName}> selectById(${pkColumn.javaType} id);
+
+    /**
+     * 查询${functionName}列表
+     * 
+     * @param ${className} ${functionName}
+     * @return ${functionName}集合
+     */
+    public Flux<${ClassName}> selectList(${ClassName} ${className});
+}

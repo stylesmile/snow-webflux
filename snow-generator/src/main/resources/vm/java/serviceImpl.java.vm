@@ -1,0 +1,66 @@
+package ${packageName}.service.impl;
+
+#foreach ($column in $columns)
+#if($column.javaField == 'createTime' || $column.javaField == 'updateTime')
+import java.time.LocalDateTime;
+#break
+#end
+#end
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+#if($table.sub)
+import org.springframework.transaction.annotation.Transactional;
+import reactor.core.publisher.Mono;
+import ${packageName}.domain.${subClassName};
+#end
+import ${packageName}.mapper.mapper;
+import ${packageName}.domain.${ClassName};
+import ${packageName}.service.I${ClassName}Service;
+
+/**
+ * ${functionName}Service业务层处理
+ * 
+ * @author ${author}
+ * @date ${datetime}
+ */
+@Service
+public class ${ClassName}ServiceImpl
+	extends BaseServiceImpl<${ClassName}, ${pkColumn.javaType}, mapper>
+	implements I${ClassName}Service
+{
+    /**
+     * 新增${functionName}
+     *
+     * @param ${className} ${functionName}
+     * @return 结果
+     */
+    @Transactional
+    @Override
+    public Mono<Long> insert(${ClassName} ${className})
+    {
+#foreach ($column in $columns)
+#if($column.javaField == 'createTime')
+        ${className}.setCreateTime(LocalDateTime.now());
+#end
+#end
+        return mapper.insert(${className});
+    }
+
+    /**
+     * 修改${functionName}
+     *
+     * @param ${className} ${functionName}
+     * @return 结果
+     */
+    @Transactional
+    @Override
+    public Mono<Long> update(${ClassName} ${className})
+    {
+#foreach ($column in $columns)
+#if($column.javaField == 'updateTime')
+        ${className}.setUpdateTime(LocalDateTime.now());
+#end
+#end
+        return mapper.update(${className});
+    }
+}
