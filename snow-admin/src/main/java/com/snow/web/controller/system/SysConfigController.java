@@ -26,6 +26,7 @@ public class SysConfigController extends EntityController<SysConfig, Integer, IS
 	/**
 	 * 获取参数配置列表
 	 */
+	@Override
 	@PreAuthorize("@ss.hasPermi('system:config:list')")
 	@GetMapping("/list")
 	public Mono<TableDataInfo> list(ServerWebExchange exchange, SysConfig config) {
@@ -42,6 +43,7 @@ public class SysConfigController extends EntityController<SysConfig, Integer, IS
 	/**
 	 * 根据参数编号获取详细信息
 	 */
+	@Override
 	@PreAuthorize("@ss.hasPermi('system:config:query')")
 	@GetMapping(value = "/{configId}")
 	public Mono<AjaxResult> getInfo(@PathVariable Integer configId) {

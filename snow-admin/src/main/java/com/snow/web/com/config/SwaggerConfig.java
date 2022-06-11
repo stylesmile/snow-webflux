@@ -28,7 +28,6 @@ import springfox.documentation.spring.web.plugins.Docket;
  * 
  * @author ruoyi
  */
-@Order(1)
 @Configuration
 public class SwaggerConfig
 {
@@ -122,10 +121,9 @@ public class SwaggerConfig
                 // 描述
                 .description("描述：用于管理集团旗下公司的人员信息,具体包括XXX,XXX模块...")
                 // 作者信息
-                .contact(new Contact("snow", null, null))
+                .contact(new Contact(ruoyiConfig.getName(), null, null))
                 // 版本
-//                .version("版本号:" + ruoyiConfig.getVersion())
-                .version("版本号:" + version)
+                .version("版本号:" + ruoyiConfig.getVersion())
                 .build();
     }
 }

@@ -73,7 +73,10 @@ public class SecurityConfig {
 			// 过滤请求
 			.and().authorizeExchange()
 			// 对于登录 login 注册register 验证码captchaImage 允许匿名访问
-			.pathMatchers("/login", "/register", "/captchaImage").permitAll()
+			.pathMatchers("/login", "/register", "/captchaImage",
+					//swagger
+					"swagger-ui.html", "doc.html"
+			).permitAll()
 			.pathMatchers(
 				HttpMethod.GET,
 				"/",
