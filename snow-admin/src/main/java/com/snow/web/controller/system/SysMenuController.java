@@ -17,7 +17,7 @@ import com.snow.common.core.domain.AjaxResult;
 import com.snow.common.core.domain.entity.SysMenu;
 import com.snow.common.enums.BusinessType;
 import com.snow.common.utils.StringUtils;
-import com.snow.system.service.ISysMenuService;
+import com.snow.web.service.ISysMenuService;
 import reactor.core.publisher.Mono;
 
 /**

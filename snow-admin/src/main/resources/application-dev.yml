@@ -3,11 +3,11 @@ spring:
     main:
         lazy-initialization: false
     r2dbc:
-        url: r2dbc:mysql://localhost:3306/snow-webflux?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+        url: r2dbc:mysql://localhost:3006/snow-webflux?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
         username: root
         password: 123456
         mybatis:
-            r2dbc-url: r2dbc:mysql://localhost:3306/snow-webflux?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+            r2dbc-url: r2dbc:mysql://localhost:3006/snow-webflux?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
             username: root
             password: 123456
             pool:

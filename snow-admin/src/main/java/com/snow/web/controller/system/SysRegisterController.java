@@ -8,8 +8,8 @@ import com.snow.common.core.controller.BaseController;
 import com.snow.common.core.domain.AjaxResult;
 import com.snow.common.core.domain.model.RegisterBody;
 import com.snow.common.utils.StringUtils;
-import com.snow.framework.web.service.SysRegisterService;
-import com.snow.system.service.ISysConfigService;
+import com.snow.web.service.SysRegisterService;
+import com.snow.web.service.ISysConfigService;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 

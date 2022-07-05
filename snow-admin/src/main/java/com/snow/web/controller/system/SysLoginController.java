@@ -10,9 +10,9 @@ import com.snow.common.constant.Constants;
 import com.snow.common.core.domain.AjaxResult;
 import com.snow.common.core.domain.entity.SysUser;
 import com.snow.common.core.domain.model.LoginBody;
-import com.snow.framework.web.service.SysLoginService;
-import com.snow.framework.web.service.SysPermissionService;
-import com.snow.system.service.ISysMenuService;
+import com.snow.web.service.SysLoginService;
+import com.snow.web.service.SysPermissionService;
+import com.snow.web.service.ISysMenuService;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 

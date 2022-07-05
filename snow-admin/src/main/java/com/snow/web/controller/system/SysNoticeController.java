@@ -15,8 +15,8 @@ import com.snow.common.annotation.Log;
 import com.snow.common.core.domain.AjaxResult;
 import com.snow.common.core.page.TableDataInfo;
 import com.snow.common.enums.BusinessType;
-import com.snow.system.domain.SysNotice;
-import com.snow.system.service.ISysNoticeService;
+import com.snow.web.domain.SysNotice;
+import com.snow.web.service.ISysNoticeService;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 

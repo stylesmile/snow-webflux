@@ -8,7 +8,7 @@ import com.snow.common.core.domain.entity.SysDept;
 import com.snow.common.enums.BusinessType;
 import com.snow.common.exception.ServiceException;
 import com.snow.common.utils.StringUtils;
-import com.snow.system.service.ISysDeptService;
+import com.snow.web.service.ISysDeptService;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;

@@ -8,7 +8,7 @@ import com.snow.common.core.domain.AjaxResult;
 import com.snow.common.core.redis.RedisCache;
 import com.snow.common.utils.sign.Base64;
 import com.snow.common.utils.uuid.IdUtils;
-import com.snow.system.service.ISysConfigService;
+import com.snow.web.service.ISysConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.util.FastByteArrayOutputStream;

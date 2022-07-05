@@ -35,6 +35,19 @@ yarn dev
 # 构建测试环境 yarn build:stage
 # 构建生产环境 yarn build:prod
 # 前端访问地址 http://localhost:80
+
+# 如果报错 “nrm : 无法加载文件 C:\Users\hc\AppData\Roaming\npm\nrm.ps1”
+以管理员模式打开powershell
+执行  
+set-ExecutionPolicy RemoteSigned 
+再输入  A
+
+如果报错
+error https://registry.npm.cn/@atsfe/qaxd/download/@atsfe/qaxd-2.7.1.tgz: Integrity check failed for "@atsfe/qaxd" (computed integrity doesn't match our records, got "sha512-luOkbBkBgK2ebBaNZ/R9HWOcLYAPCGdBU0V+QU2/8fSnfk98NnlF8TLy2pQVsgJoR2ChK7RwSl7e47FMPB6I9w== sha1-thtKzMcuKzdaNgBYEwmI4HTalME=")
+输入 
+yarn cache clean
+yarn install --no-lockfile --update-checksums
+
 ```
 
 ## 内置功能

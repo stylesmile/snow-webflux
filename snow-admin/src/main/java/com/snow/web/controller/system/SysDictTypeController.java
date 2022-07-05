@@ -7,7 +7,7 @@ import com.snow.common.core.domain.AjaxResult;
 import com.snow.common.core.domain.entity.SysDictType;
 import com.snow.common.core.page.TableDataInfo;
 import com.snow.common.enums.BusinessType;
-import com.snow.system.service.ISysDictTypeService;
+import com.snow.web.service.ISysDictTypeService;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
